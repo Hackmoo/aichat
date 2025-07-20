@@ -7,14 +7,17 @@ import ChatBar from "./chatBar";
 import { AnimatePresence, motion } from "framer-motion";
 import { useStore } from "../store/store";
 
+
 export default function SideBar() {
   const [isSidebarOpen, changeIsSidebarOpen] = useState<boolean>(true);
   const [initialRender, setInitialRender] = useState<boolean>(true);
   const chats = useStore((state) => state.chat)
  useEffect(() => {
     setInitialRender(() => false);
-  }, []);
+  }, [])
 
+
+  const addChat = useStore(state => state.addNewChat)
   const changeSidebarState = () => {
     changeIsSidebarOpen((e) => !e);
   };
@@ -42,7 +45,10 @@ export default function SideBar() {
                 <ArrowMinimizeIcon />
               </button>
             </div>
-            <button className="flex mt-4 items-center gap-2.5 cursor-pointer px-4 py-2 rounded-2xl transition duration-200 shadow bg-gray-700 hover:bg-gray-500 active:bg-gray-400">
+            <button 
+            className="flex mt-4 items-center gap-2.5 cursor-pointer px-4 py-2 rounded-2xl transition duration-200 shadow bg-gray-700 hover:bg-gray-500 active:bg-gray-400" 
+            onClick={() => addChat()}
+            >
               <AddChatIcon />
               New Chat+
             </button>

@@ -11,6 +11,10 @@ export const useStore = create((set, get) => ({
       ],
       id: 0
     },
+    {
+      messages: [],
+      id: 1
+    },
   ],
   addMessage: (message, id) => {
     const { chat } = get();
@@ -33,5 +37,11 @@ export const useStore = create((set, get) => ({
   deleteChat: (id) => {
     const { chat } = get()
     set({chat: chat.filter(el => el.id !== id)})
-  }
+  },
+  addNewChat: () => {
+  const { chat } = get();
+  set({ 
+    chat: [...chat, { messages: [], id: Date.now() }] 
+  });
+}
 }));
