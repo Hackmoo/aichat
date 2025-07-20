@@ -1,72 +1,20 @@
-"use client";
-import { useState, useRef, useEffect } from "react";
-import Message from "./components/message";
-import { useStore } from "./store/store";
+'use client'
 
-export default function Home() {
-  const [value, setValue] = useState<string>("");
-  const inputRef = useRef<HTMLTextAreaElement>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const messagesContainerRef = useRef<HTMLDivElement>(null);
-  
-  const messages = useStore(state => state.messages);
-  const addMessage = useStore(state => state.sendRequest);
-  const sendingIsLocked = useStore(state => state.sendingIsLocked)
+import { useRouter } from "next/navigation"
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+export default function NotFound() {
+    const router = useRouter()
 
-  const scrollToBottom = () => {
-    if (messagesContainerRef.current) {
-      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
-    }
-  };
-
-  const handleClick = () => {
-    if (!value.trim() || sendingIsLocked) return;
-    
-    addMessage({id: Date.now(), message: value, type: 'user'});
-    setValue('');
-  };
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.style.height = "auto";
-      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
-    }
-  }, [value]);
-
-  return (
-    <div className="flex flex-col h-[100svh] w-full bg-gray-500">
-      <div 
-        ref={messagesContainerRef}
-        className="flex-1 overflow-y-auto py-4 px-2"
-      >
-        <div className="w-[70%] mx-auto flex flex-col gap-3">
-          {messages?.map((el) => (
-            <Message key={el.id} type={el.type} message={el.message} />
-          ))}
-          <div ref={messagesEndRef} />
+    return (
+        <div className="flex w-full h-[100svh] overflow-hidden items-center justify-center flex-col">
+            <h1 className="text-4xl font-bold">Ooops...</h1>
+            <h2 className="text-3xl font-semibold">Looks like we do not have it</h2>
+            <button 
+                    className="border text-2xl px-3.5 py-2 cursor-pointer rounded-2xl shadow transition duration-200 hover:bg-gray-600 hover:text-white hover:scale-90 active:scale-110 mt-10"
+                    onClick={() => router.push('/')}
+                    >
+                Back home
+            </button>
         </div>
-      </div>
-      <div className="w-full flex items-center justify-center sticky bottom-0 bg-gray-400 shadow-2xl py-6">
-        <div className="w-[70%] border-2 border-gray-600 rounded-2xl px-4 py-2 flex items-center justify-center bg-gray-200">
-          <textarea
-            ref={inputRef}
-            onInput={(e) => setValue(e.currentTarget.value)}
-            value={value}
-            placeholder="Hi, let's look up for something new!"
-            className="w-full outline-none resize-none max-h-60 bg-transparent"
-          />
-          <button 
-            className="cursor-pointer transition p-4 rounded-2xl hover:text-white hover:bg-gray-600 active:bg-gray-500" 
-            onClick={handleClick}
-          >
-            {sendingIsLocked ? 'loading' : 'click'}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+    )
 }

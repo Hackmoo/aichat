@@ -5,11 +5,12 @@ import AddChatIcon from "../icons/addChatIcon";
 import ArrowMinimizeIcon from "../icons/ArrowMinimize";
 import ChatBar from "./chatBar";
 import { AnimatePresence, motion } from "framer-motion";
+import { useStore } from "../store/store";
 
 export default function SideBar() {
   const [isSidebarOpen, changeIsSidebarOpen] = useState<boolean>(true);
   const [initialRender, setInitialRender] = useState<boolean>(true);
-
+  const chats = useStore((state) => state.chat)
  useEffect(() => {
     setInitialRender(() => false);
   }, []);
@@ -45,8 +46,8 @@ export default function SideBar() {
               <AddChatIcon />
               New Chat+
             </button>
-            <div>
-              <ChatBar />
+            <div className="mt-6 flex flex-col gap-3">
+              {chats.map(el => <ChatBar name={`Chat №" ${el.id}`} id={el.id}/>)}
             </div>
           </motion.div>
         )}
