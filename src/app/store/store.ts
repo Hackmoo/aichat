@@ -17,7 +17,6 @@ export const useStore = create((set, get) => ({
     let foundChat = chat.findIndex(el => el.id === id);
     if(foundChat === -1) return;
     chat[foundChat].messages = [...chat[foundChat].messages, message]
-    console.log(chat[foundChat])
   },
   sendRequest: (message, id) => {
     const { addMessage, sendingIsLocked } = get();
@@ -31,4 +30,8 @@ export const useStore = create((set, get) => ({
       set({ sendingIsLocked: false });
     }, 4000);
   },
+  deleteChat: (id) => {
+    const { chat } = get()
+    set({chat: chat.filter(el => el.id !== id)})
+  }
 }));

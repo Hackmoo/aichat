@@ -47,7 +47,7 @@ export default function SideBar() {
               New Chat+
             </button>
             <div className="mt-6 flex flex-col gap-3">
-              {chats.map(el => <ChatBar name={`Chat №" ${el.id}`} id={el.id}/>)}
+              {chats.map(el => <ChatBar key={el.id} name={`Chat №" ${el.id}`} id={el.id}/>)}
             </div>
           </motion.div>
         )}
