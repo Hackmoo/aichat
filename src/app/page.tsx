@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation"
 import { useStore } from "./store/store"
 
 export default function NotFound() {
-    const router = useRouter()
     const addNewChat = useStore((state) => state.addNewChat)
 
     return (
