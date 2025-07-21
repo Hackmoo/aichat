@@ -1,5 +1,6 @@
 import { useParams, useRouter } from "next/navigation";
 import { useStore } from "../store/store";
+import TrashCan from "../icons/trashCan";
 
 export default function ChatBar({
   name = "",
@@ -31,7 +32,7 @@ export default function ChatBar({
           deleteChat();
         }}
       >
-        del
+        <TrashCan />
       </div>
     </div>
   );
