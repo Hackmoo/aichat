@@ -6,7 +6,7 @@ export default function NotFound() {
     const router = useRouter()
 
     return (
-        <div className="flex w-full h-[100svh] overflow-hidden items-center justify-center flex-col">
+        <div className="flex w-full h-[100svh] overflow-hidden items-center justify-center flex-col text-white">
             <h1 className="text-4xl font-bold">Ooops...</h1>
             <h2 className="text-3xl font-semibold">Looks like we do not have it</h2>
             <button 

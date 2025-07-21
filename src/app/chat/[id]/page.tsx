@@ -49,7 +49,7 @@ export default function Home() {
 
   if (!currentChat) {
     return (
-      <div className="flex flex-col h-[100svh] w-full bg-gray-500 items-center justify-center">
+      <div className="flex flex-col h-[100svh] w-full bg-gray-500 items-center justify-center text-white">
         <p>Loading or chat not found...</p>
       </div>
     );
@@ -69,7 +69,7 @@ export default function Home() {
             <div ref={messagesEndRef} />
           </div>
         ) : (
-          <div className="w-full text-center mt-10">
+          <div className="w-full text-center mt-10 text-white text-4xl font-bold">
             <p>No messages yet. Start the conversation!</p>
           </div>
         )}
